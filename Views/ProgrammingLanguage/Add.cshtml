@@ -1,0 +1,22 @@
+﻿@model ProgrammingLanguage
+
+@{
+    ViewData["Title"] = "Добавление языка программирования";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<form asp-action="Create" asp-controller="ProgrammingLanguage" method="post">
+    <div>
+        <div class="form-group">
+            <label asp-for="@Model.LanguageName">Наименование языка</label>
+            <input asp-for="@Model.LanguageName" class="form-control  form-control-lg" required />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />
+        </div>
+    </div>
+</form>

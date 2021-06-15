@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ProgrammingLanguage>
+@{
+    ViewData["Title"] = "Список языков программирования";
+}
+
+@if (ViewBag.message == true)
+{
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            alert ("Нельзя удалить строчку, которая используется в таблице 'сотрудники'");
+        });
+    </script>
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<p><a asp-area="" asp-controller="ProgrammingLanguage" asp-action="Add">Добавить язык</a></p>
+<table class="table">
+    <thead>
+        <tr><th>Id языка</th><th>Наименование языка</th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.LanguageName</td>
+                <td>
+                    <form method="post">
+                        <a asp-area="" asp-controller="ProgrammingLanguage" asp-action="Delete" asp-route-id="@item.Id">Удалить </a>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

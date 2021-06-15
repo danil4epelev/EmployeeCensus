@@ -1,0 +1,42 @@
+﻿@model ModelForEmployee
+
+@{
+    ViewData["Title"] = "Изменение сотрудника";
+}
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<form asp-action="Update" asp-controller="Home" method="post">
+    <div>
+        <div class="form-group">
+            <label asp-for=@Model.employee.Name>Имя</label>
+            <input type="text" asp-for="@Model.employee.Name" class="form-control form-control-lg" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.employee.Surname">Фамилия</label>
+            <input asp-for="@Model.employee.Surname" class="form-control  form-control-lg" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.employee.DateOfBirth">Дата рождения: </label>
+            <input type="date" asp-for="@Model.employee.DateOfBirth" class="form-control form-control-lg" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.employee.DepartamentId">Отдел:  </label>
+            <select asp-for="@Model.employee.DepartamentId"
+                    asp-items="@(new SelectList(Model.@enum.departaments, "Id","DepartamentName"))" required>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.employee.LanguageId">Язык программирования:  </label>
+            <select asp-for="@Model.employee.LanguageId"
+                    asp-items="@(new SelectList(Model.@enum.programmingLanguages, "Id","LanguageName"))" required>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />
+        </div>
+    </div>
+</form>
+

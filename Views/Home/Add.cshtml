@@ -1,0 +1,57 @@
+﻿@model ModelForEmployee
+
+
+
+@{
+    ViewData["Title"] = "Добавление сотрудника";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<form asp-action="Create" asp-controller="Home" method="post">
+    <div>
+        
+
+        <div class="form-group">
+            <label asp-for=@Model.employee.Name for="tags">Имя</label>
+            <input type="text" asp-for="@Model.employee.Name" class="form-control form-control-lg" data-autocomplete-source='@Url.Action("AutocompleteSearch", "Home")' required />
+            <script type="text/javascript">
+                $(function () {
+                    $("[data-autocomplete-source]").each(function () {
+                        var target = $(this);
+                        target.autocomplete({ source: target.attr("data-autocomplete-source") });
+                    });
+                });
+             
+            </script>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.employee.Surname">Фамилия</label>
+            <input asp-for="@Model.employee.Surname" class="form-control  form-control-lg" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.employee.DateOfBirth">Дата рождения: </label>
+            <input type="date" asp-for="@Model.employee.DateOfBirth" class="form-control form-control-lg" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.employee.Departament.Id">Отдел:  </label>
+            <select asp-for="@Model.employee.Departament.Id"
+                    asp-items="@(new SelectList(Model.@enum.departaments, "Id","DepartamentName"))" required>
+                <option value="">Выберите отдел</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.employee.ProgrammingLanguage.Id">Язык программирования:  </label>
+            <select asp-for="@Model.employee.ProgrammingLanguage.Id"
+                    asp-items="@(new SelectList(Model.@enum.programmingLanguages, "Id","LanguageName"))" required>
+                <option value="">Выберите язык</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />
+        </div>
+    </div>
+</form>
